@@ -1,5 +1,6 @@
-import React from "react";
-
+import React  from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp , faArrowDown , faPlay , faPause} from '@fortawesome/free-solid-svg-icons';
 
 
 class Timer extends React.Component {
@@ -44,7 +45,6 @@ class Timer extends React.Component {
               time: this.state.time + 1000,
               isOn: true,
         });
-        console.log(this.state.sessionLength, this.state.breakLength)
         this.timer = setInterval(() => {
             this.setState({
                 time: this.state.time + 1000
@@ -67,7 +67,6 @@ class Timer extends React.Component {
                 });
             }
         }, 1000);
-        
     }
 
 
@@ -144,23 +143,27 @@ class Timer extends React.Component {
           src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
         />
                 <div id="length-wrapper">
-                    <div id="break-wrapper">
+                    <div id="break-wrapper" className="length">
                         <h2 id="break-label">Break Length</h2>
+                        <button id="break-increment" onClick={this.incrementBreak}><FontAwesomeIcon icon={faArrowUp} /></button>
                         <div id="break-length">{this.state.breakLength}</div>
-                        <button id="break-increment" onClick={this.incrementBreak}>+</button>
-                        <button id="break-decrement" onClick={this.decrementBreak}>-</button>
+                        <button id="break-decrement" onClick={this.decrementBreak}><FontAwesomeIcon icon={faArrowDown} /></button>
                     </div>
-                    <div id="session-wrapper">
+                    <div id="session-wrapper" className="length">
                         <h2 id="session-label">Session Length</h2>
+                        <button id="session-increment" onClick={this.incrementSession}><FontAwesomeIcon icon={faArrowUp} /></button>
                         <div id="session-length">{this.state.sessionLength}</div>
-                        <button id="session-increment" onClick={this.incrementSession}>+</button>
-                        <button id="session-decrement" onClick={this.decrementSession}>-</button>
+                        <button id="session-decrement" onClick={this.decrementSession}><FontAwesomeIcon icon={faArrowDown} /></button>
                     </div>
                 </div>
-                <div id="timer-wrapper">
-                    <h2 id="timer-label">{this.state.timerType}</h2>
-                    <div id="time-left">{this.state.timeLeft}</div>
-                    <button id="start_stop" onClick={this.startStop}>Start/Stop</button>
+                <div className = "g">
+                    <div id="timer-wrapper">
+                        <h2 id="timer-label">{this.state.timerType}</h2>
+                        <div id="time-left">{this.state.timeLeft}</div>
+                    </div>
+                </div>
+                <div id="start-reset">
+                    <button id="start_stop" onClick={this.startStop}>{this.state.isOn? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}</button>
                     <button id="reset" onClick={this.resetTimer}>Reset</button>
                 </div>
             </div>
